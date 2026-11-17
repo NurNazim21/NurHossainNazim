@@ -118,6 +118,13 @@ export function CommandPalette() {
         <CommandSeparator />
 
         <CommandGroup heading="Pages & Case Studies">
+          <CommandItem onSelect={() => navigate('/projects')}>
+            <span className="flex items-center gap-2.5">
+              <FolderGit2 className="h-4 w-4 text-accent" />
+              All Projects (index)
+            </span>
+            <CommandShortcut>/projects</CommandShortcut>
+          </CommandItem>
           <CommandItem onSelect={() => navigate('/blog')}>
             <span className="flex items-center gap-2.5">
               <PenLine className="h-4 w-4 text-accent" />

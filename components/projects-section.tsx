@@ -192,6 +192,16 @@ export function ProjectsSection() {
             <ProjectCard key={project.slug} project={project} index={index} />
           ))}
         </div>
+
+        <div className="mt-8">
+          <Link
+            href="/projects"
+            className="inline-flex items-center gap-1.5 font-mono text-xs text-foreground hover:text-accent transition-colors"
+          >
+            View all {profile.projects.length} projects
+            <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
+          </Link>
+        </div>
       </RevealSection>
     </section>
   );
