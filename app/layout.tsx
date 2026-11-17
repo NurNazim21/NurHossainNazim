@@ -52,11 +52,20 @@ export const metadata: Metadata = {
     siteName: profile.name,
     title: profile.seo.title,
     description: profile.seo.description,
+    images: [
+      {
+        url: '/og/home.png',
+        width: 1200,
+        height: 630,
+        alt: `${profile.name} — ${profile.role}`,
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: profile.seo.title,
     description: profile.seo.description,
+    images: ['/og/home.png'],
   },
   robots: {
     index: true,
@@ -99,7 +108,7 @@ const personJsonLd = {
   ],
 };
 
-const themeInitScript = `
+const bootScript = `
 (function(){
   try {
     var t = localStorage.getItem('nazim-theme');
@@ -109,6 +118,12 @@ const themeInitScript = `
       document.documentElement.classList.add('dark');
     }
   } catch(e) {}
+  document.documentElement.classList.add('js');
+  window.setTimeout(function(){
+    if (!window.__siteReady) {
+      document.documentElement.classList.add('motion-fallback');
+    }
+  }, 5000);
 })();
 `;
 
@@ -124,7 +139,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        <script dangerouslySetInnerHTML={{ __html: bootScript }} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
@@ -135,7 +150,7 @@ export default function RootLayout({
           <MotionRoot>
             <a
               href="#main-content"
-              className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:rounded-md focus:bg-accent focus:px-4 focus:py-2 focus:text-xs focus:font-medium focus:text-accent-foreground"
+              className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:rounded-md focus:bg-accent-strong focus:px-4 focus:py-2 focus:text-xs focus:font-medium focus:text-accent-foreground"
             >
               Skip to content
             </a>

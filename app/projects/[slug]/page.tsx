@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import { ArrowLeft, ArrowRight, Github } from 'lucide-react';
 import { profile } from '@/data/profile';
 import { Button } from '@/components/ui/button';
-import { ProjectConceptPreview } from '@/components/project-previews';
+import { ProjectVisual } from '@/components/project-visual';
 
 export function generateStaticParams() {
   return profile.projects.map((project) => ({
@@ -33,6 +33,11 @@ export async function generateMetadata({
       ? project.summary
       : `${project.summary.slice(0, 155)}...`;
 
+  // Case studies with a real product screenshot share that shot; the rest fall back
+  // to the site card. Static files live in public/og/.
+  const withShot = new Set(['plant-disease-cnn', 'tank-arena', 'eshop-bd']);
+  const ogImage = withShot.has(project.slug) ? `/og/${project.slug}.jpg` : '/og/home.png';
+
   return {
     title: { absolute: title },
     description,
@@ -40,9 +45,17 @@ export async function generateMetadata({
       canonical: `/projects/${project.slug}`,
     },
     openGraph: {
+      type: 'article',
       title,
       description,
       url: `/projects/${project.slug}`,
+      images: [{ url: ogImage, width: 1200, height: 630, alt: `${project.title} — ${profile.name}` }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [ogImage],
     },
   };
 }
@@ -102,26 +115,51 @@ export default async function ProjectDetailPage({
         </p>
 
         <div className="mt-7 flex flex-wrap items-center gap-4">
-          <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
-            <Button variant="accent">
-              <Github className="h-4 w-4" />
-              <span>View on GitHub</span>
-            </Button>
-          </a>
+          {project.githubUrl ? (
+            <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+              <Button variant="accent">
+                <Github className="h-4 w-4" />
+                <span>View on GitHub</span>
+              </Button>
+            </a>
+          ) : (
+            <p className="font-mono text-xs text-muted-foreground">
+              Repository available on request
+            </p>
+          )}
           <p className="font-mono text-xs text-muted-foreground">
             {project.stack.join(' · ')}
           </p>
+          {project.metrics && project.metrics.length > 0 && (
+            <p className="font-mono text-[11px] tracking-tight text-accent">
+              {project.metrics.join(' · ')}
+            </p>
+          )}
         </div>
       </header>
 
-      {/* Interactive Interface Concept Preview */}
-      <section aria-label="Interactive architecture preview" className="py-10 border-b border-border">
+      {/* Real product screenshot when available, otherwise the interface concept */}
+      <section aria-label="Project interface" className="py-10 border-b border-border">
         <p className="font-mono text-xs text-muted-foreground mb-4">
-          System Concept Preview
+          {project.screenshot ? 'Product Interface' : 'System Concept Preview'}
         </p>
-        <div className="min-h-[210px]">
-          <ProjectConceptPreview kind={project.previewKind} />
-        </div>
+        {project.screenshot ? (
+          <figure className="overflow-hidden rounded-lg border border-border bg-surface-subtle">
+            <img
+              src={project.screenshot.src}
+              alt={project.screenshot.alt}
+              width={project.screenshot.width}
+              height={project.screenshot.height}
+              loading="lazy"
+              decoding="async"
+              className="w-full h-auto"
+            />
+          </figure>
+        ) : (
+          <div className="min-h-[210px]">
+            <ProjectVisual project={project} />
+          </div>
+        )}
       </section>
 
       {/* Architecture Flow & Implementation Notes */}

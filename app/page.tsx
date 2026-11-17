@@ -7,6 +7,7 @@ import { ResearchSection } from '@/components/research-section';
 import { ExperienceSection } from '@/components/experience-section';
 import { AboutSection } from '@/components/about-section';
 import { ToolkitSection } from '@/components/toolkit-section';
+import { WritingSection } from '@/components/writing-section';
 import { ContactSection } from '@/components/contact-section';
 
 export const metadata: Metadata = {
@@ -37,6 +38,10 @@ export default function HomePage() {
         <EcgDivider />
       </div>
       <AboutSection />
+      <div className="mx-auto max-w-[1200px] px-6 md:px-10">
+        <EcgDivider />
+      </div>
+      <WritingSection />
       <div className="mx-auto max-w-[1200px] px-6 md:px-10">
         <EcgDivider />
       </div>

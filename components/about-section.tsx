@@ -27,6 +27,10 @@ export function AboutSection() {
           >
             Background &amp; <span className="font-editorial-italic text-accent">foundation</span>.
           </h2>
+
+          <p className="mt-6 max-w-[76ch] text-base sm:text-lg leading-relaxed text-muted-foreground">
+            {profile.summary}
+          </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">

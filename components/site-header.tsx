@@ -11,6 +11,7 @@ const navLinks = [
   { label: 'Research', href: '/#research' },
   { label: 'Experience', href: '/#experience' },
   { label: 'About', href: '/#about' },
+  { label: 'Writing', href: '/blog' },
   { label: 'Resume', href: '/resume' },
 ];
 
@@ -31,7 +32,7 @@ export function SiteHeader() {
         {/* Zone 2: Concise single-line navigation links */}
         <nav
           aria-label="Primary navigation"
-          className="hidden md:flex items-center gap-7 text-sm font-medium text-muted-foreground"
+          className="hidden lg:flex items-center gap-6 text-sm font-medium text-muted-foreground"
         >
           {navLinks.map((item) => (
             <Link
@@ -46,7 +47,7 @@ export function SiteHeader() {
 
         {/* Zone 3: Single Primary Action */}
         <div className="flex items-center gap-3 shrink-0">
-          <Link href="/#contact" className="hidden md:inline-flex">
+          <Link href="/#contact" className="hidden lg:inline-flex">
             <Button variant="accent" size="sm">
               Contact
             </Button>
@@ -55,7 +56,7 @@ export function SiteHeader() {
           <button
             type="button"
             onClick={() => setMobileOpen((prev) => !prev)}
-            className="inline-flex md:hidden items-center justify-center h-10 w-10 rounded-md border border-border text-foreground hover:bg-surface transition-colors cursor-pointer"
+            className="inline-flex lg:hidden items-center justify-center h-10 w-10 rounded-md border border-border text-foreground hover:bg-surface transition-colors cursor-pointer"
             aria-label={mobileOpen ? 'Close navigation menu' : 'Open navigation menu'}
             aria-expanded={mobileOpen}
           >
@@ -66,7 +67,7 @@ export function SiteHeader() {
 
       {/* Mobile Drawer */}
       {mobileOpen && (
-        <div className="md:hidden border-t border-border bg-background px-6 py-4">
+        <div className="lg:hidden border-t border-border bg-background px-6 py-4">
           <nav aria-label="Mobile navigation" className="flex flex-col gap-3">
             {navLinks.map((item) => (
               <Link

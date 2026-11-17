@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { ArrowUpRight, Github } from 'lucide-react';
 import { useReducedMotion } from 'motion/react';
 import { profile, type ProjectItem } from '@/data/profile';
-import { ProjectConceptPreview } from '@/components/project-previews';
+import { ProjectVisual } from '@/components/project-visual';
 import { RevealSection } from '@/components/motion-primitives';
 
 type FilterType = 'All' | 'AI & ML' | 'Full-Stack';
@@ -82,12 +82,18 @@ function ProjectCard({ project, index }: { project: ProjectItem; index: number }
           </p>
         </div>
 
-        {/* Code-Built Interface Preview */}
+        {/* Real product screenshot, or the code-built interface preview */}
         <div className="min-h-[172px]">
-          <ProjectConceptPreview kind={project.previewKind} />
+          <ProjectVisual project={project} />
         </div>
 
-        <div className="space-y-4 pt-2 border-t border-border">
+        <div className="space-y-3 pt-2 border-t border-border">
+          {project.metrics && project.metrics.length > 0 && (
+            <p className="font-mono text-[11px] tracking-tight text-accent">
+              {project.metrics.join(' · ')}
+            </p>
+          )}
+
           {/* Unboxed stack readout separated by middots */}
           <p className="font-mono text-xs text-muted-foreground leading-relaxed">
             {project.stack.join(' · ')}
@@ -102,16 +108,22 @@ function ProjectCard({ project, index }: { project: ProjectItem; index: number }
               <ArrowUpRight className="h-3.5 w-3.5" />
             </Link>
 
-            <a
-              href={project.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 font-mono text-xs text-muted-foreground hover:text-foreground transition-colors whitespace-nowrap shrink-0"
-              aria-label={`View ${project.title} on GitHub`}
-            >
-              <Github className="h-3.5 w-3.5" />
-              <span>Source</span>
-            </a>
+            {project.githubUrl ? (
+              <a
+                href={project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 font-mono text-xs text-muted-foreground hover:text-foreground transition-colors whitespace-nowrap shrink-0"
+                aria-label={`View ${project.title} source on GitHub`}
+              >
+                <Github className="h-3.5 w-3.5" />
+                <span>Source</span>
+              </a>
+            ) : (
+              <span className="font-mono text-xs text-muted-foreground/70 whitespace-nowrap shrink-0">
+                Repo on request
+              </span>
+            )}
           </div>
         </div>
       </div>

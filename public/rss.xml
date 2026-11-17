@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Nur Hossain Nazim — Writing</title>
+    <link>https://nur-hossain-nazim.vercel.app/blog</link>
+    <description>Short write-ups on machine learning, research, and the systems behind the projects on this site.</description>
+    <language>en</language>
+    <lastBuildDate>Wed, 18 Nov 2026 00:00:00 GMT</lastBuildDate>
+    <atom:link href="https://nur-hossain-nazim.vercel.app/rss.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Rebuilding my portfolio as a working site, not a brochure</title>
+      <link>https://nur-hossain-nazim.vercel.app/blog/rebuilding-the-portfolio</link>
+      <guid isPermaLink="true">https://nur-hossain-nazim.vercel.app/blog/rebuilding-the-portfolio</guid>
+      <pubDate>Wed, 18 Nov 2026 00:00:00 GMT</pubDate>
+      <description>Real screenshots instead of mockups, repo links that resolve, a portrait that actually belongs in the hero, and an accessibility pass that caught three contrast failures I never would have seen.</description>
+    </item>
+  </channel>
+</rss>

@@ -11,6 +11,11 @@ import {
 import { cn } from '@/lib/utils';
 
 export function MotionRoot({ children }: { children: React.ReactNode }) {
+  React.useEffect(() => {
+    // Tells the inline boot script that motion is live, so its failsafe keeps quiet.
+    (window as unknown as { __siteReady?: boolean }).__siteReady = true;
+  }, []);
+
   return <MotionConfig reducedMotion="user">{children}</MotionConfig>;
 }
 

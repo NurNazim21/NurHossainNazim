@@ -4,13 +4,18 @@ export interface ProjectItem {
   shortTitle: string;
   category: 'AI & ML' | 'Full-Stack';
   year: string;
+  heroHook: {
+    line1: string;
+    line2: string;
+  };
   summary: string;
   highlights: string[];
   architectureNote: string;
   stack: string[];
   metrics?: string[];
-  githubUrl: string;
+  githubUrl?: string;
   liveUrl?: string;
+  screenshot?: { src: string; width: number; height: number; alt: string };
   previewKind: 'rag' | 'cnn' | 'tank' | 'eshop' | 'campus';
 }
 
@@ -45,24 +50,35 @@ export const profile = {
   location: 'Dhaka, Bangladesh',
   coordinates: '23.81° N / 90.41° E',
   timezone: 'UTC+06:00',
-  email: 'nnazim223296@bscse.uiu.ac.bd',
+  email: 'nurhossainnazim21@gmail.com',
+  academicEmail: 'nnazim223296@bscse.uiu.ac.bd',
   phone: '+880 1954900122',
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://nurnazim.vercel.app',
+  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://nur-hossain-nazim.vercel.app',
   version: '2026.11',
-  portraitPath:
-    '/assets/aistudio/493328250_4060941407558796_3474560319503407751_n-Picsart-AiImageEnhancer_fe35681c.jpg',
-  cvPath: '/assets/aistudio/Nazim_CV_6f90c2d5.pdf',
+  portraitPath: '/images/portrait-campus.webp',
+  portraitHero: {
+    src: '/images/portrait-1200.webp',
+    srcSmall: '/images/portrait-800.webp',
+    width: 1200,
+    height: 1500,
+    alt: 'Portrait of Nur Hossain Nazim, final-year CSE student at United International University',
+  },
+  cvPath: '/assets/Nur_Hossain_Nazim_CV.pdf',
   links: {
     github: 'https://github.com/NurNazim21',
     linkedin: 'https://www.linkedin.com/in/nur-hossain-nazim/',
-    eshopRepo: 'https://github.com/NurNazim21/Web-lab-Team_Dhumketu71',
+    eshopRepo: 'https://github.com/NurNazim21/ecommerce-dbms',
+  },
+  heroHook: {
+    line1: 'I build AI systems and full-stack products that ship.',
+    line2: 'Open to AI/ML internships and research collaboration.',
   },
   summary:
     'Final-year B.Sc. Computer Science and Engineering student at United International University (UIU) with research interest in data science, AI and machine learning. Built full-stack and real-time applications (Java/Spring Boot, PHP/MySQL) and AI projects including a multimodal RAG pipeline and a CNN-based classifier. Currently researching myocardial infarction detection from echocardiography for the Final Year Design Project.',
   seo: {
     title: 'Nur Hossain Nazim — AI & Machine Learning Engineer',
     description:
-      'Portfolio of Nur Hossain Nazim, final-year B.Sc. CSE student at United International University, Dhaka. Projects in Multimodal RAG, CNNs, echocardiography ML research, and full-stack systems.',
+      'Nur Hossain Nazim, final-year CSE student at UIU Dhaka. AI/ML projects: multimodal RAG, CNN classifiers, echocardiography research and full-stack systems.',
     keywords: [
       'Nur Hossain Nazim',
       'Nur Nazim',
@@ -114,7 +130,7 @@ export const profile = {
         'Document Ingestion -> Chunking & Image Extraction -> Hybrid BM25 + Vector Index -> Vision-Language Synthesis -> Grounded Answer',
       stack: ['Python', 'BM25', 'Vector Search', 'Vision-Language Models'],
       metrics: ['Hybrid BM25 + Dense Vector', 'VLM Document Parsing'],
-      githubUrl: 'https://github.com/NurNazim21',
+      githubUrl: 'https://github.com/NurNazim21/Rag_project',
       previewKind: 'rag',
     },
     {
@@ -134,7 +150,12 @@ export const profile = {
         '87,867 Leaf Images -> Normalization & Augmentation -> Multi-Layer Conv2D Feature Extractor -> 38-Class Softmax Classifier (97% Accuracy)',
       stack: ['Python', 'CNN', 'TensorFlow'],
       metrics: ['97% Accuracy', '87,867 Images', '38 Classes'],
-      githubUrl: 'https://github.com/NurNazim21',
+      screenshot: {
+        src: '/projects/plant.webp',
+        width: 1010,
+        height: 505,
+        alt: 'Plant Disease Recognition upload page: a green leaf on a card under the upload form.',
+      },
       previewKind: 'cnn',
     },
     {
@@ -154,7 +175,13 @@ export const profile = {
         'Phaser 3 Browser Client <-> SockJS / STOMP WebSocket Broker <-> Spring Boot Authoritative Arena State',
       stack: ['Java', 'Spring Boot', 'WebSocket', 'STOMP', 'SockJS', 'Phaser 3'],
       metrics: ['Real-Time State Sync', 'STOMP / SockJS'],
-      githubUrl: 'https://github.com/NurNazim21',
+      githubUrl: 'https://github.com/NurNazim21/Tank-Arena',
+      screenshot: {
+        src: '/projects/tank.webp',
+        width: 1024,
+        height: 512,
+        alt: 'Tank Arena lobby: commander name field, four map themes and single player or multiplayer buttons beside a blue tank.',
+      },
       previewKind: 'tank',
     },
     {
@@ -174,7 +201,13 @@ export const profile = {
         '4-Role RBAC Gateways -> PHP Core & MySQL Catalog -> LLM Assistant API + Courier Logistics API',
       stack: ['PHP', 'MySQL', 'LLM API', 'Courier API'],
       metrics: ['4-Role RBAC', 'LLM + Courier APIs'],
-      githubUrl: 'https://github.com/NurNazim21/Web-lab-Team_Dhumketu71',
+      githubUrl: 'https://github.com/NurNazim21/ecommerce-dbms',
+      screenshot: {
+        src: '/projects/eshop.webp',
+        width: 982,
+        height: 491,
+        alt: 'E-Shop BD storefront: full-width living room hero reading Elevate Your Lifestyle, with delivery and payment badges below.',
+      },
       previewKind: 'eshop',
     },
     {
@@ -194,7 +227,6 @@ export const profile = {
         'Next.js App Router UI -> TypeScript Domain Layer -> Prisma ORM -> PostgreSQL Campus Resource Graph',
       stack: ['Next.js', 'TypeScript', 'Prisma', 'PostgreSQL', 'Tailwind CSS'],
       metrics: ['Senior-Junior Mentorship', 'Prisma + PostgreSQL'],
-      githubUrl: 'https://github.com/NurNazim21',
       previewKind: 'campus',
     },
   ] as ProjectItem[],

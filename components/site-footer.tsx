@@ -22,6 +22,9 @@ export function SiteFooter() {
         </div>
 
         <div className="flex flex-wrap items-center gap-5 text-xs font-mono text-muted-foreground">
+          <Link href="/blog" className="hover:text-foreground transition-colors">
+            Writing
+          </Link>
           <Link href="/research" className="hover:text-foreground transition-colors">
             Research
           </Link>
@@ -48,10 +51,14 @@ export function SiteFooter() {
             type="button"
             onClick={toggleTheme}
             className="inline-flex items-center gap-1.5 text-foreground hover:text-accent transition-colors cursor-pointer"
-            aria-label="Toggle color theme"
           >
-            {theme === 'dark' ? <Sun className="h-3.5 w-3.5" /> : <Moon className="h-3.5 w-3.5" />}
-            <span>{theme === 'dark' ? 'Light' : 'Dark'}</span>
+            {theme === 'dark' ? (
+              <Sun className="h-3.5 w-3.5" aria-hidden="true" />
+            ) : (
+              <Moon className="h-3.5 w-3.5" aria-hidden="true" />
+            )}
+            <span className="sr-only">Switch to {theme === 'dark' ? 'light' : 'dark'} theme</span>
+            <span aria-hidden="true">{theme === 'dark' ? 'Light' : 'Dark'}</span>
           </button>
         </div>
       </div>

@@ -2,20 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import {
-  ArrowUpRight,
-  Compass,
-  Copy,
-  Check,
-  FileText,
-  Github,
-  Linkedin,
-  Mail,
-  Moon,
-  Sun,
-  FlaskConical,
-  FolderGit2,
-} from 'lucide-react';
+import { ArrowUpRight, Check, Compass, Copy, FileText, FlaskConical, FolderGit2, Github, Linkedin, Mail, Moon, PenLine, Sun } from 'lucide-react';
 import {
   CommandDialog,
   CommandEmpty,
@@ -131,6 +118,13 @@ export function CommandPalette() {
         <CommandSeparator />
 
         <CommandGroup heading="Pages & Case Studies">
+          <CommandItem onSelect={() => navigate('/blog')}>
+            <span className="flex items-center gap-2.5">
+              <PenLine className="h-4 w-4 text-accent" />
+              Writing & Notes
+            </span>
+            <CommandShortcut>/blog</CommandShortcut>
+          </CommandItem>
           <CommandItem onSelect={() => navigate('/research')}>
             <span className="flex items-center gap-2.5">
               <FlaskConical className="h-4 w-4 text-accent" />

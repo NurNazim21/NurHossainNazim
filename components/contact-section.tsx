@@ -58,7 +58,7 @@ export function ContactSection() {
       window.location.href = `mailto:${profile.email}?subject=${subject}&body=${body}`;
       setStatus('success');
       setFeedback(
-        'Opened your default mail client with a pre-filled draft. Configure NEXT_PUBLIC_WEB3FORMS_KEY for silent in-page delivery.'
+        'Opening your mail app with this message pre-filled. If nothing happens, email me directly at nurhossainnazim21@gmail.com.'
       );
       return;
     }
@@ -138,6 +138,15 @@ export function ContactSection() {
                     <Copy className="h-3.5 w-3.5" />
                   )}
                 </button>
+              </div>
+              <div className="flex items-center justify-between gap-3">
+                <span className="text-muted-foreground">University Email</span>
+                <a
+                  href={`mailto:${profile.academicEmail}`}
+                  className="text-foreground hover:text-accent transition-colors"
+                >
+                  {profile.academicEmail}
+                </a>
               </div>
               <div className="flex items-center justify-between gap-3">
                 <span className="text-muted-foreground">Phone</span>

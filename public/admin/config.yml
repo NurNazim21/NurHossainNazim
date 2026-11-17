@@ -1,0 +1,76 @@
+# Writing desk (Sveltia CMS)
+# Signs in with a GitHub token, commits Markdown to content/blog,
+# and Vercel rebuilds the site on push.
+
+backend:
+  name: github
+  repo: NurNazim21/NurHossainNazim
+  branch: main
+
+# Images uploaded in the editor land here and are served from /blog/<file>
+media_folder: public/blog
+public_folder: /blog
+
+site_url: https://nur-hossain-nazim.vercel.app
+display_url: https://nur-hossain-nazim.vercel.app/blog
+logo_url: https://nur-hossain-nazim.vercel.app/icon.svg
+
+publish_mode: simple
+
+collections:
+  - name: blog
+    label: Writing
+    label_singular: Post
+    description: >-
+      Save as draft by turning Publish off. The file name becomes the URL, so keep it
+      lowercase with dashes (e.g. echocardiography-first-look).
+    folder: content/blog
+    create: true
+    delete: true
+    slug: '{{slug}}'
+    preview_path: 'blog/{{slug}}'
+    sortable_fields: [date, title]
+    fields:
+      - name: title
+        label: Title
+        widget: string
+      - name: date
+        label: Date
+        widget: datetime
+        date_format: 'YYYY-MM-DD'
+        time_format: false
+        picker_utc: true
+      - name: excerpt
+        label: Summary
+        widget: text
+        required: false
+        hint: One or two sentences. Shows on the blog list, in search results and in link previews.
+      - name: cover
+        label: Cover image
+        widget: image
+        required: false
+        hint: Landscape works best (16:9 or 2:1). Upload from this field.
+      - name: coverAlt
+        label: Cover description
+        widget: string
+        required: false
+        hint: Describe the image for screen readers.
+      - name: tags
+        label: Tags
+        widget: list
+        required: false
+        default: []
+        hint: Two or three keywords, e.g. machine learning, research.
+      - name: published
+        label: Publish
+        widget: boolean
+        default: true
+        hint: Off keeps the post as a draft that does not appear on the site.
+      - name: featured
+        label: Feature at top of the blog
+        widget: boolean
+        default: false
+        required: false
+      - name: body
+        label: Body
+        widget: markdown
