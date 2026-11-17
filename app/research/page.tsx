@@ -10,6 +10,7 @@ export const metadata: Metadata = {
     'Ongoing undergraduate research by Nur Hossain Nazim on myocardial infarction detection from echocardiography videos using the HMC-QU dataset at UIU.',
   alternates: {
     canonical: '/research',
+    types: { 'application/rss+xml': '/rss.xml' },
   },
 };
 

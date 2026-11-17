@@ -15,6 +15,7 @@ export const metadata: Metadata = {
   description: profile.seo.description,
   alternates: {
     canonical: '/',
+    types: { 'application/rss+xml': '/rss.xml' },
   },
 };
 

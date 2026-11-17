@@ -11,6 +11,7 @@ export const metadata: Metadata = {
     'Curriculum Vitae of Nur Hossain Nazim — B.Sc. CSE student at UIU, Teaching Assistant, AI/ML and full-stack developer.',
   alternates: {
     canonical: '/resume',
+    types: { 'application/rss+xml': '/rss.xml' },
   },
 };
 

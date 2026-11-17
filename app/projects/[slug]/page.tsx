@@ -43,6 +43,7 @@ export async function generateMetadata({
     description,
     alternates: {
       canonical: `/projects/${project.slug}`,
+      types: { 'application/rss+xml': '/rss.xml' },
     },
     openGraph: {
       type: 'article',
