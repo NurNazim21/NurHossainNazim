@@ -27,11 +27,11 @@ The home page grows a **Writing** strip automatically once you have posts.
 
 1. Open `https://github.com/NurNazim21/NurHossainNazim/settings` and tick
    **Discussions** under Features.
-2. Create a discussion category named **Comments** (Announcements format is
-   fine: only maintainers start threads, which is what we want).
+2. Use the built-in **Announcements** category (only maintainers start threads,
+   which is what we want; giscus only needs to post comments inside them).
 3. Install the giscus app on the repo: `https://github.com/apps/giscus`.
 4. Go to `https://giscus.app`, enter `NurNazim21/NurHossainNazim`, choose
-   mapping **Specific term**, category **Comments**, theme **dark_dimmed**.
+   mapping **Specific term**, category **Announcements**, theme **dark_dimmed**.
 5. Copy the two ids from the generated snippet and paste them into
    `data/blog.ts`:
 
@@ -39,7 +39,7 @@ The home page grows a **Writing** strip automatically once you have posts.
 giscus: {
   repo: 'NurNazim21/NurHossainNazim',
   repoId: 'R_kgDO…',        // data-repo-id
-  category: 'Comments',
+  category: 'Announcements',
   categoryId: 'DIC_kwDO…',  // data-category-id
 },
 ```
