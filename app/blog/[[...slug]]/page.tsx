@@ -24,9 +24,22 @@ export function generateStaticParams() {
   return [{ slug: [] as string[] }, ...getAllPosts().map((post) => ({ slug: [post.slug] }))];
 }
 
+/**
+ * Search engines truncate around 155 characters, so cut on a word boundary
+ * instead of letting Google invent its own snippet mid-sentence.
+ */
+function clampDescription(text: string, max = 155) {
+  const clean = text.replace(/\s+/g, ' ').trim();
+  if (clean.length <= max) return clean;
+  const cut = clean.slice(0, max - 1);
+  return `${cut.slice(0, cut.lastIndexOf(' ') || cut.length)}…`;
+}
+
 const indexMetadata: Metadata = {
-  title: blog.title,
-  description: blog.description,
+  title: 'Writing on AI, ML and research',
+  description: clampDescription(
+    'Write-ups on machine learning, echocardiography research, retrieval systems and the engineering behind the projects on this site.',
+  ),
   alternates: { canonical: '/blog', types: { 'application/rss+xml': '/rss.xml' } },
   openGraph: {
     type: 'website',
@@ -49,7 +62,8 @@ export async function generateMetadata({
   const post = getPostBySlug(postSlug);
   if (!post) return { title: 'Post Not Found' };
 
-  const description = post.excerpt ?? post.title;
+  const rawDescription = post.excerpt ?? post.title;
+  const description = clampDescription(rawDescription);
   const image = post.cover ? `${profile.siteUrl.replace(/\/$/, '')}${post.cover}` : '/og/home.png';
 
   return {
@@ -78,7 +92,33 @@ export default async function BlogRoute({ params }: { params: Promise<{ slug?: s
   const { slug = [] } = await params;
   const postSlug = slug[0];
 
-  if (!postSlug) return <BlogIndex />;
+  if (!postSlug) {
+    const blogJsonLd = {
+      '@context': 'https://schema.org',
+      '@type': 'Blog',
+      name: blog.title,
+      description: blog.description,
+      url: `${profile.siteUrl}/blog`,
+      inLanguage: 'en',
+      author: { '@type': 'Person', name: profile.name, url: profile.siteUrl },
+      publisher: { '@type': 'Person', name: profile.name, url: profile.siteUrl },
+      blogPost: getAllPosts().map((item) => ({
+        '@type': 'BlogPosting',
+        headline: item.title,
+        url: `${profile.siteUrl}/blog/${item.slug}`,
+        datePublished: item.isoDate,
+      })),
+    };
+    return (
+      <>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(blogJsonLd) }}
+        />
+        <BlogIndex />
+      </>
+    );
+  }
 
   const post = getPostBySlug(postSlug);
   if (!post) notFound();
@@ -97,6 +137,23 @@ export default async function BlogRoute({ params }: { params: Promise<{ slug?: s
     mainEntityOfPage: { '@type': 'WebPage', '@id': `${profile.siteUrl}/blog/${post.slug}` },
     ...(post.cover ? { image: `${profile.siteUrl.replace(/\/$/, '')}${post.cover}` } : {}),
     ...(post.tags?.length ? { keywords: post.tags.join(', ') } : {}),
+    inLanguage: 'en',
+    isPartOf: { '@type': 'Blog', name: blog.title, url: `${profile.siteUrl}/blog` },
+  };
+
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: profile.siteUrl },
+      { '@type': 'ListItem', position: 2, name: 'Writing', item: `${profile.siteUrl}/blog` },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: post.title,
+        item: `${profile.siteUrl}/blog/${post.slug}`,
+      },
+    ],
   };
 
   return (
@@ -104,6 +161,10 @@ export default async function BlogRoute({ params }: { params: Promise<{ slug?: s
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
 
       <Link
@@ -168,7 +229,40 @@ export default async function BlogRoute({ params }: { params: Promise<{ slug?: s
       </div>
 
       <div className="mt-12 max-w-[72ch]">
-        <PostComments slug={post.slug} />
+        <RevealSection className="mt-16 border-t border-border pt-8">
+        <h2 className="font-mono text-xs text-muted-foreground">Related</h2>
+        <ul className="mt-4 grid gap-x-8 gap-y-1 sm:grid-cols-2">
+          <li>
+            <Link
+              href="/research"
+              className="group flex items-baseline justify-between gap-4 border-b border-border py-2.5 transition-colors hover:border-accent"
+            >
+              <span className="text-sm text-foreground">
+                FYDP: myocardial infarction detection from echocardiography
+              </span>
+              <span className="shrink-0 font-mono text-[11px] text-muted-foreground">Research</span>
+            </Link>
+          </li>
+          {profile.projects
+            .filter((item) => item.category === 'AI & ML')
+            .slice(0, 2)
+            .map((item) => (
+              <li key={item.slug}>
+                <Link
+                  href={`/projects/${item.slug}`}
+                  className="group flex items-baseline justify-between gap-4 border-b border-border py-2.5 transition-colors hover:border-accent"
+                >
+                  <span className="text-sm text-foreground">{item.title}</span>
+                  <span className="shrink-0 font-mono text-[11px] text-muted-foreground">
+                    Case study
+                  </span>
+                </Link>
+              </li>
+            ))}
+        </ul>
+      </RevealSection>
+
+      <PostComments slug={post.slug} />
       </div>
 
       <nav

@@ -84,6 +84,26 @@ export default async function ProjectDetailPage({
       name: profile.name,
       url: profile.siteUrl,
     },
+    mainEntityOfPage: `${profile.siteUrl}/projects/${project.slug}`,
+    isPartOf: { '@type': 'CollectionPage', name: 'Selected Work', url: `${profile.siteUrl}/#work` },
+    ...(project.screenshot
+      ? { image: `${profile.siteUrl.replace(/\/$/, '')}${project.screenshot}` }
+      : {}),
+  };
+
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: profile.siteUrl },
+      { '@type': 'ListItem', position: 2, name: 'Selected Work', item: `${profile.siteUrl}/#work` },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: project.title,
+        item: `${profile.siteUrl}/projects/${project.slug}`,
+      },
+    ],
   };
 
   return (
@@ -91,6 +111,10 @@ export default async function ProjectDetailPage({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
 
       <Link

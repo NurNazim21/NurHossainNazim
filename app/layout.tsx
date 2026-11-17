@@ -44,6 +44,7 @@ export const metadata: Metadata = {
   creator: profile.name,
   alternates: {
     canonical: '/',
+    types: { 'application/rss+xml': '/rss.xml' },
   },
   openGraph: {
     type: 'website',
@@ -70,7 +71,35 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
   },
+  // Verified in Google Search Console / Bing Webmaster by setting
+  // NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION or NEXT_PUBLIC_BING_SITE_VERIFICATION
+  // in Vercel. No code change needed once the code exists.
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || undefined,
+    other: process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION
+      ? { 'msvalidate.01': process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION }
+      : {},
+  },
+};
+
+const websiteJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: `${profile.name} — Portfolio`,
+  alternateName: [profile.name, `${profile.name} Portfolio`, 'Nur Hossain Nazim AI/ML'],
+  url: profile.siteUrl,
+  inLanguage: 'en',
+  description: profile.seo.description,
+  publisher: { '@type': 'Person', name: profile.name, url: profile.siteUrl },
+  about: { '@type': 'Person', name: profile.name, url: profile.siteUrl },
 };
 
 const personJsonLd = {
@@ -143,6 +172,10 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
       </head>
       <body className="min-h-screen bg-background text-foreground antialiased selection:bg-accent selection:text-accent-foreground">
