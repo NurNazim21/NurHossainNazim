@@ -1,0 +1,4 @@
+Contact: mailto:nurhossainnazim21@gmail.com
+Expires: 2027-11-01T00:00:00.000Z
+Preferred-Languages: en, bn
+Canonical: https://nur-hossain-nazim.vercel.app/.well-known/security.txt
