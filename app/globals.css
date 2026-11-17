@@ -1,0 +1,134 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: #f7f6f2;
+  --foreground: #121210;
+  --surface: #eceae3;
+  --surface-subtle: #e2dfd6;
+  --muted-foreground: #5c5a52;
+  --border: rgba(18, 18, 16, 0.11);
+  --border-strong: rgba(18, 18, 16, 0.22);
+  --accent: #dc2626;
+  --accent-soft: rgba(220, 38, 38, 0.1);
+  --accent-foreground: #ffffff;
+  --ring: #dc2626;
+}
+
+.dark {
+  --background: #0e0e0c;
+  --foreground: #f4f3ee;
+  --surface: #161613;
+  --surface-subtle: #1d1d19;
+  --muted-foreground: #9c9a91;
+  --border: rgba(244, 243, 238, 0.1);
+  --border-strong: rgba(244, 243, 238, 0.22);
+  --accent: #f04438;
+  --accent-soft: rgba(240, 68, 56, 0.14);
+  --accent-foreground: #ffffff;
+  --ring: #f04438;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-subtle: var(--surface-subtle);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-foreground: var(--accent-foreground);
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-serif), ui-serif, Georgia, serif;
+  --font-mono: var(--font-mono), ui-monospace, SFMono-Regular, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+.dark body {
+  letter-spacing: 0.005em;
+}
+
+.font-editorial-italic {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Subtle archival film grain overlay (zero layout cost, pointer-events none) */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 40;
+  opacity: 0.032;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.dark .grain-overlay {
+  opacity: 0.045;
+}
+
+/* Accessible focus outlines */
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+/* ECG stroke keyframes using transform/stroke-dashoffset only */
+@keyframes ecg-pulse {
+  0%, 100% {
+    opacity: 0.72;
+  }
+  45% {
+    opacity: 1;
+  }
+}
+
+.animate-ecg-breathe {
+  animation: ecg-pulse 2.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-ecg-breathe {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+/* Print optimization for /resume */
+@media print {
+  .no-print,
+  .grain-overlay {
+    display: none !important;
+  }
+  body {
+    background: #ffffff !important;
+    color: #111111 !important;
+  }
+}
