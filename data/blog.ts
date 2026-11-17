@@ -19,9 +19,9 @@ export const blog = {
    */
   giscus: {
     repo: 'NurNazim21/NurHossainNazim',
-    repoId: '',
-    category: 'Comments',
-    categoryId: '',
+    repoId: 'R_kgDOVxoPVg',
+    category: 'Announcements',
+    categoryId: 'DIC_kwDOVxoPVs4DLXLQ',
   },
   /** Optional email signup (e.g. https://buttondown.com/your-name form URL). */
   newsletterUrl: '',
