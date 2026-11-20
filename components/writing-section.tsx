@@ -21,7 +21,7 @@ export function WritingSection() {
       <RevealSection>
         <div className="mb-10 flex flex-wrap items-end justify-between gap-4 border-b border-border pb-6">
           <div>
-            <p className="mb-2 font-mono text-xs text-muted-foreground">Blog</p>
+            <p className="mb-2 font-mono text-xs text-muted-foreground">Writing</p>
             <h2
               id="writing-heading"
               className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl"
