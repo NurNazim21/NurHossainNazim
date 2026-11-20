@@ -121,7 +121,7 @@ export function CommandPalette() {
           <CommandItem onSelect={() => navigate('/blog')}>
             <span className="flex items-center gap-2.5">
               <PenLine className="h-4 w-4 text-accent" />
-              Writing & Notes
+              Blog & Notes
             </span>
             <CommandShortcut>/blog</CommandShortcut>
           </CommandItem>

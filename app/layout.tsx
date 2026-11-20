@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Fraunces, JetBrains_Mono, Plus_Jakarta_Sans } from 'next/font/google';
+import localFont from 'next/font/local';
 import './globals.css';
 import { profile } from '@/data/profile';
 import { ThemeProvider } from '@/components/theme-provider';
@@ -10,26 +10,43 @@ import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
 import { CommandPalette } from '@/components/command-palette';
 
-const plusJakartaSans = Plus_Jakarta_Sans({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
+/**
+ * Fonts are self-hosted (app/fonts) instead of fetched from Google at build
+ * time. `next/font/google` downloads the files during `next build`, so a blip
+ * on fonts.googleapis.com fails the whole deploy with "An error occurred in
+ * next/font". Serving the same woff2 files from the repo makes builds
+ * deterministic and removes two third-party origins from the critical path.
+ */
+const plusJakartaSans = localFont({
+  src: [
+    { path: './fonts/plus-jakarta-sans-400.woff2', weight: '400', style: 'normal' },
+    { path: './fonts/plus-jakarta-sans-500.woff2', weight: '500', style: 'normal' },
+    { path: './fonts/plus-jakarta-sans-600.woff2', weight: '600', style: 'normal' },
+    { path: './fonts/plus-jakarta-sans-700.woff2', weight: '700', style: 'normal' },
+  ],
   variable: '--font-sans',
   display: 'swap',
+  fallback: ['system-ui', 'Segoe UI', 'Helvetica Neue', 'Arial', 'sans-serif'],
 });
 
-const fraunces = Fraunces({
-  subsets: ['latin'],
-  weight: ['400'],
-  style: ['normal', 'italic'],
+const fraunces = localFont({
+  src: [
+    { path: './fonts/fraunces-400.woff2', weight: '400', style: 'normal' },
+    { path: './fonts/fraunces-400-italic.woff2', weight: '400', style: 'italic' },
+  ],
   variable: '--font-serif',
   display: 'swap',
+  fallback: ['Georgia', 'Times New Roman', 'serif'],
 });
 
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ['latin'],
-  weight: ['400', '500'],
+const jetbrainsMono = localFont({
+  src: [
+    { path: './fonts/jetbrains-mono-400.woff2', weight: '400', style: 'normal' },
+    { path: './fonts/jetbrains-mono-500.woff2', weight: '500', style: 'normal' },
+  ],
   variable: '--font-mono',
   display: 'swap',
+  fallback: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
 });
 
 export const metadata: Metadata = {

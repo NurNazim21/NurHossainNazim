@@ -23,7 +23,7 @@ export function SiteFooter() {
 
         <div className="flex flex-wrap items-center gap-5 text-xs font-mono text-muted-foreground">
           <Link href="/blog" className="hover:text-foreground transition-colors">
-            Writing
+            Blog
           </Link>
           <Link href="/research" className="hover:text-foreground transition-colors">
             Research

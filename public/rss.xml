@@ -8,11 +8,11 @@
     <lastBuildDate>Wed, 18 Nov 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://nur-hossain-nazim.vercel.app/rss.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Rebuilding my portfolio as a working site, not a brochure</title>
-      <link>https://nur-hossain-nazim.vercel.app/blog/rebuilding-the-portfolio</link>
-      <guid isPermaLink="true">https://nur-hossain-nazim.vercel.app/blog/rebuilding-the-portfolio</guid>
+      <title>A heart attack shows up as stillness</title>
+      <link>https://nur-hossain-nazim.vercel.app/blog/heart-attack-shows-up-as-stillness</link>
+      <guid isPermaLink="true">https://nur-hossain-nazim.vercel.app/blog/heart-attack-shows-up-as-stillness</guid>
       <pubDate>Wed, 18 Nov 2026 00:00:00 GMT</pubDate>
-      <description>Real screenshots instead of mockups, repo links that resolve, a portrait that actually belongs in the hero, and an accessibility pass that caught three contrast failures I never would have seen.</description>
+      <description>Echocardiography records motion, not anatomy. That single fact explains most of why finding a myocardial infarction in an ultrasound video is a different problem from reading a chest X-ray.</description>
     </item>
   </channel>
 </rss>

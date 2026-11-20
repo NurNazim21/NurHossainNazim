@@ -324,7 +324,7 @@ function BlogIndex() {
 
       <header className="border-b border-border pb-10">
         <p className="mb-3 font-mono text-xs text-muted-foreground">
-          Writing · {posts.length} {posts.length === 1 ? 'post' : 'posts'}
+          Blog · {posts.length} {posts.length === 1 ? 'post' : 'posts'}
         </p>
         <h1 className="text-3xl font-bold tracking-tight text-foreground text-balance sm:text-5xl">
           Notes from building <span className="font-editorial-italic text-accent">things</span>.

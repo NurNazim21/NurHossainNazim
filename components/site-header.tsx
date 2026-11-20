@@ -11,7 +11,7 @@ const navLinks = [
   { label: 'Research', href: '/#research' },
   { label: 'Experience', href: '/#experience' },
   { label: 'About', href: '/#about' },
-  { label: 'Writing', href: '/blog' },
+  { label: 'Blog', href: '/blog' },
   { label: 'Resume', href: '/resume' },
 ];
 
